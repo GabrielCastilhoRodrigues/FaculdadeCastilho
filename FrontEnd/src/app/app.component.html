@@ -1,0 +1,30 @@
+<nav class="navbar navbar-dark bg-dark navbar-expand-sm">
+    <div class="container-fluid">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a routerLink="/" class="nav-link" routerLinkActive="active">
+                    <b>Faculdade Castilho</b>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="/aluno" class="nav-link" routerLinkActive="active">Aluno</a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="/curso" class="nav-link" routerLinkActive="active">Curso</a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="/professor" class="nav-link" routerLinkActive="active">Professor</a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="/disciplina" class="nav-link" routerLinkActive="active">Disciplina</a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="/nota" class="nav-link" routerLinkActive="active">Nota</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,85 @@
+<div class="container p-5" *ngIf="visibilidadeTabela">
+    <div class="border border-light rounded p-5 shadow">
+        <div>
+            <button type="button" class="btn btn-sm btn-secondary" (click)="ExibirFormularioCadastro()">Nova Nota</button>
+        </div>
+
+        <hr/>
+
+        <table class="table table-striped table-hover table-sm" *ngIf="notas">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Aluno</th>
+                <th scope="col">Disciplina</th>
+                <th scope="col">Nota</th>
+                <th scope="col">Ações</th>
+            </tr>
+            
+            <tr *ngFor="let nota of notas">
+                <td>{{nota.idNota}}</td>
+                <td>{{nota.numMatricula}}</td>
+                <td>{{nota.idDisciplina}}</td>
+                <td>{{nota.nota}}</td>
+                <td>
+                    <button type="button" class="btn btn-sm btn-outline-info" (click)="ExibirFormularioAtualizacao(nota.idNota)">Atualizar</button>
+                    <button type="button" class="btn btn-sm btn-outline-danger" (click)="ExibirExcluirNota(nota.idNota)">Excluir</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div class="container p-5" *ngIf="visibilidadeFormulario">
+    <div class="row">
+        <div class="col-6 border-light rounded p-5 shadow" *ngIf="formulario">
+            <h6>{{tituloFormulario}}</h6>
+            <hr/>
+
+            <form [formGroup]="formulario" (ngSubmit)="EnviarNota()">
+                <div class="form-group" *ngIf="visibilidadeIdNota">
+                    <label>ID</label>
+                    <input type="number" class="form-control form-control-sm" formControlName="idNota" readonly/>
+                </div>
+                <div class="form-group">
+                    <label>Aluno</label>
+                    <select class="form-control form-control-sm" formControlName="numMatricula">
+                        <option *ngFor="let aluno of alunos" [value]="aluno.numMatricula">{{ aluno.nome }}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Disciplina</label>
+                    <select class="form-control form-control-sm" formControlName="idDisciplina">
+                        <option *ngFor="let disciplina of disciplinas" [value]="disciplina.idDisciplina">{{ disciplina.nome }}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Nota</label>
+                    <input type="number" class="form-control form-control-sm" formControlName="nota" step="0.01" min="0.01"/>
+                </div>
+                <hr/>
+
+                <div>
+                    <button type="submit" class="btn btn-sm btn-dark">Salvar</button>
+                    <button type="button" class="pl-1 btn btn-sm btn-light" (click)="Voltar()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<ng-template #exclusaoNota>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Confirmar Exclusão</h4>
+      <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modal.hide()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      Excluir Nota
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.hide()">Não</button>
+        <button type="button" class="btn btn-outline-danger" (click)="ExcluirNota(idNota)">Sim</button>
+    </div>
+</ng-template>

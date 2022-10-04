@@ -1,0 +1,40 @@
+Create table Curso(
+	idCurso int not null,
+	nome varchar(40) not null,
+	Primary Key(idCurso)
+);
+
+Create table Professor(
+	numRegistro int not null,
+	nome varchar(40) not null,
+	dataNascimento date not null,
+	salario decimal(6,2) not null,
+	Primary Key(numRegistro)
+);
+
+Create table Disciplina(
+	idDisciplina int not null,
+	numRegistro int not null,
+	idCurso int not null,
+	nome varchar(40) not null,
+	Primary Key(idDisciplina),
+	Foreign Key(numRegistro) references Professor(numRegistro),
+	Foreign Key(idCurso) references Curso(idCurso)
+);
+
+Create table Aluno(
+	numMatricula int not null,
+	nome varchar(40) not null,
+	dataNascimento date not null,
+	Primary Key(numMatricula)
+);
+
+Create table Nota(
+	idNota int not null,
+	idDisciplina int not null,
+	numMatricula int not null,
+	nota decimal(3, 2),
+	Primary Key(idNota),
+	Foreign Key(idDisciplina) references Disciplina(idDisciplina),
+	Foreign Key(numMatricula) references Aluno(numMatricula)
+);
